@@ -12,7 +12,7 @@ import './style/background.png'
 
 let events = [{title: 'TEst'}];
 const fetchEventList = () => {
-    axios.get(`http://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
+    axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
         .then(res => {
             events = res.data;
             refreshReact();
@@ -36,10 +36,7 @@ class IndexComponent extends React.Component {
     }
 
     onClickEvenListHeader() {
-        console.log("executou handler");
         this.setState({indexBodyVisible: false});
-        console.log(this.state.indexBodyVisible);
-        //refreshReact();
     }
 
     render() {
