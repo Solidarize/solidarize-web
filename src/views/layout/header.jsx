@@ -22,7 +22,7 @@ class HeaderLayout extends React.Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="/index" title="Solidarize">
+                        <a className="navbar-brand" href="#" onClick={this.props.onClickHome} title="Solidarize">
                             Solidarize
                         </a>
                     </div>
