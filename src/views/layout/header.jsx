@@ -29,9 +29,13 @@ class HeaderLayout extends React.Component {
 
                     <div className="collapse navbar-collapse navbar-collapse" id="myNavbar">
                         <ul className="nav navbar-nav">
-                            <li className="active"><a href="#">Home</a></li>
-                            <li><a href="#"  onClick={this.props.onClickEventList}>Eventos</a></li>
-                            <li><a href="/sobre">Sobre</a></li>
+                            <li className={this.props.active == 'home' ? "active" : ''}
+                            ><a href="#" onClick={this.props.onClickHome}>Home</a></li>
+                            <li className={this.props.active == 'event' ? "active" : ''}>
+                                <a href="#" onClick={this.props.onClickEventList}>Eventos</a>
+                            </li>
+                            <li className={this.props.active == 'sobre' ? "active" : ''}>
+                                <a href="#" onClick={this.props.onClickSobre}>Sobre</a></li>
                         </ul>
                         <form action="/connect/facebook" method="POST">
                             <input type="hidden" name="scope" value="user_posts"/>
@@ -44,6 +48,7 @@ class HeaderLayout extends React.Component {
             </nav>
         )
     }
-};
+}
+;
 
 export default HeaderLayout;
