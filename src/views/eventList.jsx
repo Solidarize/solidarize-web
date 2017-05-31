@@ -35,6 +35,7 @@ const containerStyle = {
 }
 
 
+
 class EventList extends React.Component {
     constructor(props) {
         super(props);
@@ -81,7 +82,8 @@ class EventList extends React.Component {
                                     <i className="fa fa-clock-o"></i> {event.eventTime}
                                 </p>
                                 <div style={{textAlign: 'justify'}}>{event.description}
-                                    <button className="btn btn-read-more pull-right">Leia
+                                    <button className={this.props.isEventDetail ? 'displayNone' : "btn btn-read-more pull-right"}
+                                            onClick={() => this.props.onClickLeiaMais(event.id)}>Leia
                                         mais &nbsp;&nbsp;&nbsp;&nbsp;
                                         <i className="fa fa-angle-right"></i></button>
                                 </div>

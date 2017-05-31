@@ -9,6 +9,7 @@ import SobreComponent from './views/layout/sobre'
 import CreateEventComponent from './views/createEvent'
 import EventList from './views/eventList'
 import IndexBody from './views/indexBody'
+import EventDetailComponent from './views/eventDetail'
 import './views/layout/solidarize.css'
 import './style/background.png'
 
@@ -27,6 +28,7 @@ class IndexComponent extends React.Component {
             sobreComponentVisible: false,
             eventListComponentVisible: true,
             createEventVisible: false,
+            eventDetailVisible: false,
             active: 'home',
             events: []
         }
@@ -58,6 +60,7 @@ class IndexComponent extends React.Component {
             sobreComponentVisible: false,
             eventListComponentVisible: true,
             createEventVisible: false,
+            eventDetailVisible: false,
             active: 'event'
         });
         this.fetchEventList();
@@ -69,6 +72,7 @@ class IndexComponent extends React.Component {
             sobreComponentVisible: false,
             eventListComponentVisible: true,
             createEventVisible: false,
+            eventDetailVisible: false,
             active: 'home'
         });
         this.fetchEventListByRank();
@@ -80,6 +84,7 @@ class IndexComponent extends React.Component {
             sobreComponentVisible: true,
             eventListComponentVisible: false,
             createEventVisible: false,
+            eventDetailVisible: false,
             active: 'sobre'
         });
         refreshReact();
@@ -91,9 +96,27 @@ class IndexComponent extends React.Component {
             sobreComponentVisible: false,
             eventListComponentVisible: false,
             createEventVisible: true,
+            eventDetailVisible: false,
             active: 'createEvent'
         });
         refreshReact();
+    }
+
+    onClickLeiaMais(eventId) {
+        this.setState({
+            indexBodyVisible: false,
+            sobreComponentVisible: false,
+            eventListComponentVisible: false,
+            createEventVisible: false,
+            eventDetailVisible: true,
+            active: 'eventDetail'
+        });
+
+        axios.get('https://solidarize-dev.herokuapp.com/event/' + eventId)
+            .then(res => {
+                this.setState({events: [res.data]});
+                refreshReact();
+            });
     }
 
     render() {
@@ -106,9 +129,10 @@ class IndexComponent extends React.Component {
                     onClickSobre={this.onClickSobreHeader.bind(this)}
                     onClickCreateEvent={this.onClickCreateEventHeader.bind(this)}/>/>
                 {this.state.indexBodyVisible ? <IndexBody/> : null}
-                {this.state.eventListComponentVisible ? <EventList events={this.state.events}/> : null}
+                {this.state.eventListComponentVisible ? <EventList events={this.state.events} onClickLeiaMais={this.onClickLeiaMais.bind(this)}/> : null}
                 {this.state.sobreComponentVisible ? <SobreComponent/> : null}
                 {this.state.createEventVisible ? <CreateEventComponent/> : null}
+                {this.state.eventDetailVisible ? <EventDetailComponent events={this.state.events} /> : null}
                 <FooterLayout/>
             </DefaultLayout>
         )
