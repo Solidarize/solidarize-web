@@ -1,7 +1,7 @@
 import React from 'react';
 
 const containerStyle = {
-    paddingTop: '60px'
+    paddingTop: '30px'
 }
 
 

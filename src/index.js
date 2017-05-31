@@ -6,6 +6,7 @@ import DefaultLayout from './views/layout/master'
 import FooterLayout from './views/layout/footer'
 import HeaderLayout from './views/layout/header'
 import SobreComponent from './views/layout/sobre'
+import CreateEventComponent from './views/createEvent'
 import EventList from './views/eventList'
 import IndexBody from './views/indexBody'
 import './views/layout/solidarize.css'
@@ -25,6 +26,7 @@ class IndexComponent extends React.Component {
             indexBodyVisible: true,
             sobreComponentVisible: false,
             eventListComponentVisible: true,
+            createEventVisible: false,
             active: 'home',
             events: []
         }
@@ -43,11 +45,11 @@ class IndexComponent extends React.Component {
     }
 
     fetchEventListByRank() {
-            axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
-                .then(res => {
-                    this.setState({events: res.data});
-                    refreshReact();
-                });
+        axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
+            .then(res => {
+                this.setState({events: res.data});
+                refreshReact();
+            });
     }
 
     onClickEvenListHeader() {
@@ -55,6 +57,7 @@ class IndexComponent extends React.Component {
             indexBodyVisible: false,
             sobreComponentVisible: false,
             eventListComponentVisible: true,
+            createEventVisible: false,
             active: 'event'
         });
         this.fetchEventList();
@@ -65,6 +68,7 @@ class IndexComponent extends React.Component {
             indexBodyVisible: true,
             sobreComponentVisible: false,
             eventListComponentVisible: true,
+            createEventVisible: false,
             active: 'home'
         });
         this.fetchEventListByRank();
@@ -75,7 +79,19 @@ class IndexComponent extends React.Component {
             indexBodyVisible: false,
             sobreComponentVisible: true,
             eventListComponentVisible: false,
+            createEventVisible: false,
             active: 'sobre'
+        });
+        refreshReact();
+    }
+
+    onClickCreateEventHeader() {
+        this.setState({
+            indexBodyVisible: false,
+            sobreComponentVisible: false,
+            eventListComponentVisible: false,
+            createEventVisible: true,
+            active: 'createEvent'
         });
         refreshReact();
     }
@@ -87,10 +103,12 @@ class IndexComponent extends React.Component {
                     active={this.state.active}
                     onClickEventList={this.onClickEvenListHeader.bind(this)}
                     onClickHome={this.onClickHomeHeader.bind(this)}
-                    onClickSobre={this.onClickSobreHeader.bind(this)}/>
+                    onClickSobre={this.onClickSobreHeader.bind(this)}
+                    onClickCreateEvent={this.onClickCreateEventHeader.bind(this)}/>/>
                 {this.state.indexBodyVisible ? <IndexBody/> : null}
                 {this.state.eventListComponentVisible ? <EventList events={this.state.events}/> : null}
                 {this.state.sobreComponentVisible ? <SobreComponent/> : null}
+                {this.state.createEventVisible ? <CreateEventComponent/> : null}
                 <FooterLayout/>
             </DefaultLayout>
         )
