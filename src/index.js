@@ -54,6 +54,14 @@ class IndexComponent extends React.Component {
             });
     }
 
+    fetchEventById(eventId) {
+        axios.get('https://solidarize-dev.herokuapp.com/event/' + eventId)
+            .then(res => {
+                this.setState({events: [res.data]});
+                refreshReact();
+            });
+    }
+
     onClickEvenListHeader() {
         this.setState({
             indexBodyVisible: false,
@@ -112,11 +120,7 @@ class IndexComponent extends React.Component {
             active: 'eventDetail'
         });
 
-        axios.get('https://solidarize-dev.herokuapp.com/event/' + eventId)
-            .then(res => {
-                this.setState({events: [res.data]});
-                refreshReact();
-            });
+        this.fetchEventById(eventId);
     }
 
     render() {
