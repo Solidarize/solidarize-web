@@ -11,25 +11,6 @@ import IndexBody from './views/indexBody'
 import './views/layout/solidarize.css'
 import './style/background.png'
 
-let events = [{title: 'TEst'}];
-const fetchEventListByRank = () => {
-
-    axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
-        .then(res => {
-            events = res.data;
-            refreshReact();
-        });
-}
-
-const fetchEventList = () => {
-    axios.get(`https://solidarize-dev.herokuapp.com/events?offset=10&order=desc`)
-        .then(res => {
-            events = res.data;
-            refreshReact();
-        });
-}
-
-
 const refreshReact = () => {
     ReactDOM.render(<IndexComponent/>, document.getElementById('root'));
     registerServiceWorker();
@@ -44,8 +25,29 @@ class IndexComponent extends React.Component {
             indexBodyVisible: true,
             sobreComponentVisible: false,
             eventListComponentVisible: true,
-            active: 'home'
+            active: 'home',
+            events: []
         }
+    }
+
+    componentDidMount() {
+        this.fetchEventListByRank();
+    }
+
+    fetchEventList() {
+        axios.get(`https://solidarize-dev.herokuapp.com/events?offset=10&order=desc`)
+            .then(res => {
+                this.setState({events: res.data});
+                refreshReact();
+            });
+    }
+
+    fetchEventListByRank() {
+            axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
+                .then(res => {
+                    this.setState({events: res.data});
+                    refreshReact();
+                });
     }
 
     onClickEvenListHeader() {
@@ -55,7 +57,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: true,
             active: 'event'
         });
-        fetchEventList();
+        this.fetchEventList();
     }
 
     onClickHomeHeader() {
@@ -65,7 +67,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: true,
             active: 'home'
         });
-        fetchEventListByRank();
+        this.fetchEventListByRank();
     }
 
     onClickSobreHeader() {
@@ -78,7 +80,6 @@ class IndexComponent extends React.Component {
         refreshReact();
     }
 
-
     render() {
         return (
             <DefaultLayout name={this.props.name}>
@@ -88,7 +89,7 @@ class IndexComponent extends React.Component {
                     onClickHome={this.onClickHomeHeader.bind(this)}
                     onClickSobre={this.onClickSobreHeader.bind(this)}/>
                 {this.state.indexBodyVisible ? <IndexBody/> : null}
-                {this.state.eventListComponentVisible ? <EventList events={events}/> : null}
+                {this.state.eventListComponentVisible ? <EventList events={this.state.events}/> : null}
                 {this.state.sobreComponentVisible ? <SobreComponent/> : null}
                 <FooterLayout/>
             </DefaultLayout>
@@ -97,4 +98,4 @@ class IndexComponent extends React.Component {
 }
 
 refreshReact();
-fetchEventListByRank();
+

@@ -34,12 +34,20 @@ const containerStyle = {
     paddingTop: '60px'
 }
 
+
 class EventList extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
+        if (this.props.events.length == 0) {
+            return (
+                <div className="row">
+                    <div className="loader" style={{margin:'auto'}}></div>
+                </div>
+            )
+        }
         return (
             <div className="row" style={containerStyle}>
                 {this.props.events.map(event =>
