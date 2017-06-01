@@ -44,7 +44,7 @@ class EventList extends React.Component {
     render() {
         if (this.props.events.length == 0) {
             return (
-                <div className="row">
+                <div className="row" style={containerStyle}>
                     <div className="loader" style={{margin:'auto'}}></div>
                 </div>
             )
