@@ -13,8 +13,8 @@ class EventDetailComponent extends React.Component {
             )
         }
         return (
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
+            <div className="row">
+                <div className="col-md-10 col-md-offset-1">
                     <EventList isEventDetail={true} events={this.props.events}/>
                     <div className="user-info-box">
                         <div className="row">
