@@ -43,8 +43,9 @@ class EventDetailComponent extends React.Component {
                         </div>
                     </div>
                 </div>
+                <br/><br/><br/><br/>
             </div>
-            <br/><br/><br/><br/>
+
         )
     }
 }

@@ -25,35 +25,35 @@ class CreateInstituctionComponent extends React.Component {
             .filter(el => el.name)
             .reduce((a, b) => ({...a, [b.name]: b.value}), {});
 
-        
+        body["address"] = body["state"] + " - " + body["city"] + " " + body["neighborhood"] + " " + body["house"];
         return JSON.stringify(body);
     }
 
 
     render() {
         return (
-            <div style={{paddingTop: '30px'}}>
-              <div class="row destaques">
-                  <div class="col-md-12">
-                      <h3 class="h3-destaques pull-left">Cadastrar Instituição</h3><br/><br/>
+            <div style={{paddingTop: '50px'}}>
+              <div className="row destaques">
+                  <div className="col-md-12">
+                      <h3 className="h3-destaques pull-left">Cadastrar Instituição</h3><br/><br/>
                   </div>
               </div>
-              <div class="row">
-                  <div class="container-fluid">
+              <div className="row">
+                  <div className="container-fluid">
                       <br/>
                       <form id="createInstituctionForm" onSubmit={this.onSubmit.bind(this)}>
-                          <div class="col-md-10 col-md-offset-1">
-                              <div class="form-group">
+                          <div className="col-md-10 col-md-offset-1">
+                              <div className="form-group">
                                   <h3>Nome da Instituição:</h3>
-                                  <input tabIndex="1" type="text" class="form-control input-lg"
+                                  <input tabIndex="1" type="text" className="form-control input-lg"
                                          placeholder="Nome da Instituição"
-                                         aria-describedby="basic-addon1" name="title" id="institutionName"
+                                         aria-describedby="basic-addon1" name="name" id="institutionName"
                                          maxLength="30"
                                          data-toggle="tooltip" data-placement="left"
                                          title="Nome da Instituição" rel="txtTooltip"/>
                               </div>
                           </div>
-                          <div class="col-md-5 col-md-offset-1">
+                          <div className="col-md-5 col-md-offset-1">
                               <div className="form-group">
                                   <h3>Descrição do Evento:</h3>
                                   <textarea tabIndex="2" className="form-control" 

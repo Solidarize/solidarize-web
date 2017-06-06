@@ -37,6 +37,9 @@ class HeaderLayout extends React.Component {
                             <li className={this.props.active == 'createEvent' ? "active" : ''}>
                                 <a href="#" onClick={this.props.onClickCreateEvent}>Criar Evento</a>
                             </li>
+                            <li className={this.props.active == 'createInstitution' ? "active" : ''}>
+                                <a href="#" onClick={this.props.onClickCreateInstitution}>Criar Instituição</a>
+                            </li>
                             <li className={this.props.active == 'sobre' ? "active" : ''}>
                                 <a href="#" onClick={this.props.onClickSobre}>Sobre</a></li>
                         </ul>
