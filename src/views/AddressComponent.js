@@ -70,8 +70,9 @@ class AddressComponent extends Component {
                 <h3>Local do Evento:</h3>
                 <div className="form-group">
                     <input type="text" className="form-control" placeholder="CEP"
+                           style={{width: '20%'}}
                            aria-describedby="basic-addon1" name="cep" id="cep"
-                           maxLength="30"
+                           maxLength="9"
                            data-toggle="tooltip" data-placement="left"
                            title="Cep" rel="txtTooltip" onChange={this.handleCepChange.bind(this)}/>
                 </div>

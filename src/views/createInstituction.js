@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import AddressComponent from './AddressComponent'
 
 const axiosConfig = () => {
     return axios.create({
@@ -25,7 +26,7 @@ class CreateInstituctionComponent extends React.Component {
             .filter(el => el.name)
             .reduce((a, b) => ({...a, [b.name]: b.value}), {});
 
-        body["address"] = body["state"] + " - " + body["city"] + " " + body["neighborhood"] + " " + body["house"];
+        body["address"] = body["address"] + " - " + body["addressNumber"];
         return JSON.stringify(body);
     }
 
@@ -66,43 +67,7 @@ class CreateInstituctionComponent extends React.Component {
                           </div>
                           <div className="col-md-5">
                               <div className="form-group">
-                                  <h3>Endereço da sede da Instituição:</h3>
-                                  <div className="form-group">
-                                      <div className="form-inline">
-                                          <select tabIndex="3" className="form-control"
-                                                  placeholder="Unidade Federativa"
-                                                  aria-describedby="basic-addon1" name="state" id="institutionUF"
-                                                  data-toggle="tooltip" data-placement="left"
-                                                  title="Unidade Federativa da Instituição" rel="txtTooltip">
-                                              <option selected="true" value="UF">UF</option>
-                                              <option value="PR">PR</option>
-                                              <option value="SC">SC</option>
-                                              <option value="RS">RS</option>
-                                          </select>
-                                          <input tabIndex="4" type="text" className="form-control"
-                                                 placeholder="Cidade"
-                                                 aria-describedby="basic-addon1" name="city" id="institutionCity"
-                                                 maxLength="30"
-                                                 data-toggle="tooltip" data-placement="left"
-                                                 title="Cidade da Instituição" rel="txtTooltip"/>
-                                      </div>
-                                  </div>
-                                  <div className="form-group">
-                                      <input tabIndex="5" type="text" className="form-control" placeholder="Bairro"
-                                             aria-describedby="basic-addon1" name="neighborhood" id="institutionDistrict"
-                                             maxLength="30"
-                                             data-toggle="tooltip" data-placement="left"
-                                             title="Bairro da Instituição" rel="txtTooltip"/>
-                                  </div>
-                                  <div className="form-group">
-                                      <input tabIndex="6" type="text" className="form-control"
-                                             placeholder="Logradouro"
-                                             aria-describedby="basic-addon1" name="house" id="institutionAddress"
-                                             maxLength="30"
-                                             data-toggle="tooltip" data-placement="left"
-                                             title="Endereço e Número da Instituição" rel="txtTooltip"/>
-                                  </div>
-                                  
+                                  <AddressComponent/>
                                   <div className="form-group">
                                       <br/>
                                       <h3>Dados de Contatos:</h3>

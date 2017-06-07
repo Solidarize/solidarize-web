@@ -36,7 +36,7 @@ class CreateEventComponent extends React.Component {
 
     render() {
         return (
-            <div style={{paddingTop: '30px'}}>
+            <div style={{paddingTop: '50px'}}>
                 <div className="row destaques">
                     <div className="col-md-12">
                         <h3 className="h3-destaques pull-left">Cadastrar Evento</h3><br/><br/>
@@ -82,7 +82,7 @@ class CreateEventComponent extends React.Component {
                                 <div className="form-group">
 
                                     <AddressComponent/>
-                                    
+
                                     <div className="form-group">
                                         <br/>
                                         <h3>Data e Hora:</h3>
