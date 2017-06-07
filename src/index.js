@@ -30,7 +30,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: true,
             createEventVisible: false,
             eventDetailVisible: false,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'home',
             events: []
         }
@@ -71,7 +71,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: true,
             createEventVisible: false,
             eventDetailVisible: false,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'event'
         });
         this.fetchEventList();
@@ -84,7 +84,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: true,
             createEventVisible: false,
             eventDetailVisible: false,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'home'
         });
         this.fetchEventListByRank();
@@ -97,7 +97,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: false,
             createEventVisible: false,
             eventDetailVisible: false,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'sobre'
         });
         refreshReact();
@@ -110,7 +110,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: false,
             createEventVisible: true,
             eventDetailVisible: false,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'createEvent'
         });
         refreshReact();
@@ -137,7 +137,7 @@ class IndexComponent extends React.Component {
             eventListComponentVisible: false,
             createEventVisible: false,
             eventDetailVisible: true,
-            institutionComponentVisible: true,
+            institutionComponentVisible: false,
             active: 'eventDetail'
         });
 
