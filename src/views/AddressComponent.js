@@ -8,6 +8,15 @@ const axiosConfig = () => {
     });
 }
 
+const cssForLoadingAddress = {
+    position: 'absolute',
+    right: '20px',
+    marginTop: '3px'
+}
+
+const cssForAddressInput = {
+    display: 'inline'
+}
 class AddressComponent extends Component {
 
 
@@ -15,8 +24,8 @@ class AddressComponent extends Component {
         super(props);
 
         this.state = {
-            address: ''
-
+            address: '',
+            isLoading: false
         }
     }
 
@@ -43,6 +52,7 @@ class AddressComponent extends Component {
         }
         var url = 'https://maps.google.com/maps/api/geocode/json?address=' + cep + '&sensor=false';
         axiosConfig().get(url).then(res => {
+            this.setState({isLoading: true})
             if (res.data.results.length === 0) {
                 return;
             }
@@ -51,7 +61,7 @@ class AddressComponent extends Component {
                 address: res.data.results[0].formatted_address
             })
 
-        });
+        }).then(s => this.setState({isLoading: false}));
     }
 
     render() {
@@ -73,7 +83,10 @@ class AddressComponent extends Component {
                            maxLength="30"
                            data-toggle="tooltip" data-placement="left"
                            title="Endereço" rel="txtTooltip" value={this.state.address}
-                           disabled='true'/>
+                           disabled='true'
+                           style={cssForAddressInput}/>
+                    {this.state.isLoading ? <i style={cssForLoadingAddress}
+                                               className="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i> : null}
                 </div>
                 <div className="form-group">
                     <input tabIndex="5" type="text" className="form-control"
