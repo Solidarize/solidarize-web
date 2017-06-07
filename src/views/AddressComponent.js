@@ -4,7 +4,9 @@ import axios from 'axios';
 
 const axiosConfig = () => {
     return axios.create({
-        headers: {'Content-Type': "application/json; charset=utf-8"}
+        headers: {
+            'Content-Type': "application/json; charset=utf-8"
+        }
     });
 }
 
@@ -14,6 +16,15 @@ const cssForLoadingAddress = {
     marginTop: '3px'
 }
 
+const cssForLoadingCNPJ = {
+    position: 'absolute',
+    marginTop: '3px',
+    left: '160px'
+}
+
+const cssForCNPJInput = {
+    width: '37%'
+}
 const cssForAddressInput = {
     display: 'inline'
 }
@@ -25,7 +36,9 @@ class AddressComponent extends Component {
 
         this.state = {
             address: '',
-            isLoading: false
+            cep: '',
+            isLoading: false,
+            isLoadingCNPJ: false
         }
     }
 
@@ -50,13 +63,18 @@ class AddressComponent extends Component {
             var cepSplitted = cep.split('-');
             cep = cepSplitted[0] + cepSplitted[1];
         }
+        this.updateAddress(cep);
+    }
+
+    updateAddress(cep) {
         var url = 'https://maps.google.com/maps/api/geocode/json?address=' + cep + '&sensor=false';
+        console.log(url)
         axiosConfig().get(url).then(res => {
             this.setState({isLoading: true})
             if (res.data.results.length === 0) {
                 return;
             }
-
+            console.log(res.data.results[0].formatted_address)
             this.setState({
                 address: res.data.results[0].formatted_address
             })
@@ -64,17 +82,70 @@ class AddressComponent extends Component {
         }).then(s => this.setState({isLoading: false}));
     }
 
+    handleCNPJChange(evt) {
+        let cnpj = evt.target.value;
+        cnpj = cnpj.replace(/\.|\/|\-/g, '');
+        var url = 'https://crossorigin.me/https://www.receitaws.com.br/v1/cnpj/' + cnpj;
+        this.setState({isLoadingCNPJ: true})
+        axiosConfig().get(url).then(res => {
+
+            if (res.data.status !== 'OK') {
+                return;
+            }
+
+            let cepSplitted = res.data.cep.split('.');
+            let cep = cepSplitted[0] + cepSplitted[1];
+            console.log(cep)
+            this.setState({
+                cep: cep
+            });
+
+            this.updateAddress(cep);
+            this.setState({isLoadingCNPJ: false})
+        });
+
+    }
+
     render() {
         return (
             <div>
+                { this.props.cnpjActive ? <div className="form-group">
+                    <br/>
+                    <h3>CNPJ:</h3>
+                    <div className="form-inline">
+                        <input tabIndex="7" type="text" className="form-control"
+                               placeholder="CNPJ"
+                               aria-describedby="basic-addon1" name="cnpj" id="institutionPhone"
+                               maxLength="18"
+                               style={cssForCNPJInput}
+                               data-toggle="tooltip" data-placement="left"
+                               title="CNPJ" rel="txtTooltip"
+                               onChange={this.handleCNPJChange.bind(this)}/>
+                        {this.state.isLoadingCNPJ ? <i style={cssForLoadingCNPJ}
+                                                       className="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i> : null}
+                    </div>
+                </div> : null }
                 <h3>Local do Evento:</h3>
                 <div className="form-group">
-                    <input type="text" className="form-control" placeholder="CEP"
-                           style={{width: '20%'}}
-                           aria-describedby="basic-addon1" name="cep" id="cep"
-                           maxLength="9"
-                           data-toggle="tooltip" data-placement="left"
-                           title="Cep" rel="txtTooltip" onChange={this.handleCepChange.bind(this)}/>
+                    {this.props.cnpjActive ?
+                        <input type="text" className="form-control" placeholder="CEP"
+                               style={{width: '20%'}}
+                               aria-describedby="basic-addon1" name="cep" id="cep"
+                               maxLength="9"
+                               data-toggle="tooltip" data-placement="left"
+                               title="Cep" rel="txtTooltip"
+                               value={this.state.cep} disabled='true'
+                        />
+                        :
+                        <input type="text" className="form-control" placeholder="CEP"
+                               style={{width: '20%'}}
+                               aria-describedby="basic-addon1" name="cep" id="cep"
+                               maxLength="9"
+                               data-toggle="tooltip" data-placement="left"
+                               title="Cep" rel="txtTooltip"
+                               onChange={this.handleCepChange.bind(this)}
+                        />
+                    }
                 </div>
                 <div className="form-group">
 
