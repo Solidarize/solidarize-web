@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import AddressComponent from './AddressComponent'
 
 const axiosConfig = () => {
     return axios.create({
@@ -7,13 +8,14 @@ const axiosConfig = () => {
     });
 }
 
+
 class CreateEventComponent extends React.Component {
 
     onSubmit(evt) {
         var url = "https://solidarize-dev.herokuapp.com/event";
 
         let data = this.createFormData(evt);
-
+        console.log(data);
         axiosConfig().post(url, data);
 
         evt.preventDefault();
@@ -27,7 +29,7 @@ class CreateEventComponent extends React.Component {
 
         body["timestamp"] = new Date().toISOString();
         body["event_time"] = new Date().toISOString();
-        body["address"] = body["state"] + " - " + body["city"] + " " + body["neighborhood"] + " " + body["house"];
+        body["address"] = body["address"] + " - " + body["addressNumber"];
         return JSON.stringify(body);
     }
 
@@ -67,42 +69,7 @@ class CreateEventComponent extends React.Component {
                             </div>
                             <div className="col-md-5">
                                 <div className="form-group">
-                                    <h3>Local do Evento:</h3>
-                                    <div className="form-group">
-                                        <div className="form-inline">
-                                            <select tabIndex="3" className="form-control"
-                                                    placeholder="Unidade Federativa"
-                                                    aria-describedby="basic-addon1" name="state" id="eventUF"
-                                                    data-toggle="tooltip" data-placement="left"
-                                                    title="Unidade Federativa do Evento" rel="txtTooltip">
-                                                <option selected="true" value="UF">UF</option>
-                                                <option value="PR">PR</option>
-                                                <option value="SC">SC</option>
-                                                <option value="RS">RS</option>
-                                            </select>
-                                            <input tabIndex="4" type="text" className="form-control"
-                                                   placeholder="Cidade"
-                                                   aria-describedby="basic-addon1" name="city" id="eventCity"
-                                                   maxLength="30"
-                                                   data-toggle="tooltip" data-placement="left"
-                                                   title="Cidade do Evento" rel="txtTooltip"/>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <input tabIndex="5" type="text" className="form-control" placeholder="Bairro"
-                                               aria-describedby="basic-addon1" name="neighborhood" id="eventDistrict"
-                                               maxLength="30"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Bairro do Evento" rel="txtTooltip"/>
-                                    </div>
-                                    <div className="form-group">
-                                        <input tabIndex="6" type="text" className="form-control"
-                                               placeholder="Logradouro"
-                                               aria-describedby="basic-addon1" name="house" id="eventAddress"
-                                               maxLength="30"
-                                               data-toggle="tooltip" data-placement="left"
-                                               title="Bairro do Evento" rel="txtTooltip"/>
-                                    </div>
+                                    <AddressComponent/>
                                     <div className="form-group">
                                         <br/>
                                         <h3>Foto de divulgação:</h3>
