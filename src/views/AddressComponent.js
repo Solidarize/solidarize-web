@@ -125,7 +125,7 @@ class AddressComponent extends Component {
                                                        className="fa fa-circle-o-notch fa-spin fa-2x fa-fw"></i> : null}
                     </div>
                 </div> : null }
-                <h3>Local do Evento:</h3>
+                { this.props.cnpjActive ? <h3>Endereço da Instituição:</h3>:<h3>Local do Evento:</h3>}
                 <div className="form-group">
                     {this.props.cnpjActive ?
                         <input type="text" className="form-control" placeholder="CEP"
