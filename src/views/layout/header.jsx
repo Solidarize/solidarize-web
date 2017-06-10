@@ -1,5 +1,5 @@
 import React from 'react';
-
+import * as HeaderActions from '../../actions/HeaderActions'
 
 const pStyle = {
     marginTop: '7px',
@@ -12,6 +12,26 @@ const navStyle = {
 }
 
 class HeaderLayout extends React.Component {
+    aboutAction(){
+        HeaderActions.aboutAction();
+    }
+
+    createEventAction(){
+        HeaderActions.createEventAction();
+    }
+
+    createInstitutionAction(){
+        HeaderActions.createInstitutionAction();
+    }
+
+    eventListAction(){
+        HeaderActions.eventListAction();
+    }
+
+    homeAction(){
+        HeaderActions.homeAction();
+    }
+
     render() {
         return (
             <nav className="navbar navbar-default navbar-fixed-top" style={navStyle}>
@@ -30,18 +50,18 @@ class HeaderLayout extends React.Component {
                     <div className="collapse navbar-collapse navbar-collapse" id="myNavbar">
                         <ul className="nav navbar-nav">
                             <li className={this.props.active == 'home' ? "active" : ''}
-                            ><a href="#" onClick={this.props.onClickHome}>Home</a></li>
+                            ><a href="#" onClick={this.homeAction.bind(this)}>Home</a></li>
                             <li className={this.props.active == 'event' ? "active" : ''}>
-                                <a href="#" onClick={this.props.onClickEventList}>Eventos</a>
+                                <a href="#" onClick={this.eventListAction.bind(this)}>Eventos</a>
                             </li>
                             <li className={this.props.active == 'createEvent' ? "active" : ''}>
-                                <a href="#" onClick={this.props.onClickCreateEvent}>Criar Evento</a>
+                                <a href="#" onClick={this.createEventAction.bind(this)}>Criar Evento</a>
                             </li>
                             <li className={this.props.active == 'createInstitution' ? "active" : ''}>
-                                <a href="#" onClick={this.props.onClickCreateInstitution}>Criar Instituição</a>
+                                <a href="#" onClick={this.createInstitutionAction.bind(this)}>Criar Instituição</a>
                             </li>
                             <li className={this.props.active == 'sobre' ? "active" : ''}>
-                                <a href="#" onClick={this.props.onClickSobre}>Sobre</a></li>
+                                <a href="#" onClick={this.aboutAction.bind(this)}>Sobre</a></li>
                         </ul>
                         <form action="/connect/facebook" method="POST">
                             <input type="hidden" name="scope" value="user_posts"/>

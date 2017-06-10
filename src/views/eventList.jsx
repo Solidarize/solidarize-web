@@ -1,5 +1,6 @@
 import React from 'react';
 import evento  from '../image/evento.jpg'
+import * as EventDetailsAction from '../actions/EventDetailsAction'
 
 const centralize = {
     width: '860px',
@@ -35,17 +36,20 @@ const containerStyle = {
 }
 
 
-
 class EventList extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    handleEventDetailAction(eventId) {
+        EventDetailsAction.eventDetailListAction(eventId);
     }
 
     render() {
         if (this.props.events.length == 0) {
             return (
                 <div className="row" style={containerStyle}>
-                    <div className="loader" style={{margin:'auto'}}></div>
+                    <div className="loader" style={{margin: 'auto'}}></div>
                 </div>
             )
         }
@@ -82,8 +86,9 @@ class EventList extends React.Component {
                                     <i className="fa fa-clock-o"></i> {event.eventTime}
                                 </p>
                                 <div style={{textAlign: 'justify'}}>{event.description}
-                                    <button className={this.props.isEventDetail ? 'displayNone' : "btn btn-read-more pull-right"}
-                                            onClick={() => this.props.onClickLeiaMais(event.id)}>Leia
+                                    <button
+                                        className={this.props.isEventDetail ? 'displayNone' : "btn btn-read-more pull-right"}
+                                        onClick={() => this.handleEventDetailAction(event.id)}>Leia
                                         mais &nbsp;&nbsp;&nbsp;&nbsp;
                                         <i className="fa fa-angle-right"></i></button>
                                 </div>
