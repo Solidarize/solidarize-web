@@ -43,7 +43,8 @@ class IndexComponent extends React.Component {
     componentWillMount() {
         HeaderStore.on('change', () => {
             this.setState({
-                header: HeaderStore.getAll()
+                header: HeaderStore.getAll(),
+                eventDetails: EventDetailsStore.setDefaultEventDetails()
             })
         })
 

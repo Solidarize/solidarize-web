@@ -38,6 +38,12 @@ class EventDetailsStore extends EventEmitter {
     getAll() {
         return this.eventDetail;
     }
+
+    setDefaultEventDetails() {
+        this.eventDetail.eventDetailVisible = false;
+        this.eventDetail.events = [];
+        return this.eventDetail;
+    }
 }
 
 const eventDetailsStore = new EventDetailsStore;
