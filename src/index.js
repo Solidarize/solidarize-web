@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import registerServiceWorker from './registerServiceWorker';
 import DefaultLayout from './views/layout/master'
 import FooterLayout from './views/layout/footer'
@@ -29,10 +28,7 @@ class IndexComponent extends React.Component {
         super(props);
         this.state = {
             header: HeaderStore.getAll(),
-            eventDetails: {
-                eventDetailVisible: false,
-                events: []
-            }
+            eventDetails: EventDetailsStore.getAll()
         }
     }
 

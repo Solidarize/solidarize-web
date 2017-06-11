@@ -1,38 +1,36 @@
 import React from 'react'
 import axios from 'axios';
 import AddressComponent from './AddressComponent'
-
-const axiosConfig = () => {
-    return axios.create({
-        headers: {'Content-Type': "application/json; charset=utf-8"}
-    });
-}
-
+import * as CreateEventAction from '../actions/CreateEventAction';
+import CreateEventStore  from '../stores/CreateEventStore'
 
 class CreateEventComponent extends React.Component {
 
+    constructor() {
+        super()
+        this.state = {
+            event: CreateEventStore.getAll()
+        }
+    }
+
+    componentWillMount() {
+        CreateEventStore.on('change', () => {
+            this.setState({
+                event: CreateEventStore.getAll()
+            })
+        })
+    }
+
     onSubmit(evt) {
-        var url = "https://solidarize-dev.herokuapp.com/event";
-
-        let data = this.createFormData(evt);
-        console.log(data);
-        axiosConfig().post(url, data);
-
+        let body = Array.from(evt.target.elements)
+        CreateEventAction.createEventAction(body);
         evt.preventDefault();
         return false;
     }
 
-    createFormData(evt) {
-        let body = Array.from(evt.target.elements)
-            .filter(el => el.name)
-            .reduce((a, b) => ({...a, [b.name]: b.value}), {});
-
-        body["timestamp"] = new Date().toISOString();
-        body["event_time"] = new Date().toISOString();
-        body["address"] = body["address"] + " - " + body["addressNumber"];
-        return JSON.stringify(body);
+    onClickSuccessMessage() {
+        CreateEventAction.successConfirm();
     }
-
 
     render() {
         return (
@@ -47,6 +45,12 @@ class CreateEventComponent extends React.Component {
                         <br/>
                         <form id="createEventForm" onSubmit={this.onSubmit.bind(this)}>
                             <div className="col-md-10 col-md-offset-1">
+                                {this.state.event.success ?
+                                    <div className="alert alert-success">
+                                        <a href="#" className="close" data-dismiss="alert" aria-label="close"
+                                           onClick={this.onClickSuccessMessage.bind(this)}>&times;</a>
+                                        <strong>Success!</strong> Indicates a successful or positive action.
+                                    </div> : null}
                                 <div className="form-group">
                                     <h3>Título do Evento:</h3>
                                     <input tabIndex="1" type="text" className="form-control input-lg"

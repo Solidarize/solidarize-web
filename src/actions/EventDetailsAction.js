@@ -1,8 +1,6 @@
 import dispatcher from '../Dispatcher';
 import axios from 'axios';
 
-
-
 export function eventDetailListAction(eventId) {
     dispatcher.dispatch({
         type: 'EVENT_DETAIL_COMPONENT_VISIBLE'
