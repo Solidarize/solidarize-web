@@ -1,4 +1,5 @@
 import React from 'react';
+import FacebookLogin from 'react-facebook-login';
 import * as HeaderActions from '../../actions/HeaderActions'
 
 const pStyle = {
@@ -12,24 +13,28 @@ const navStyle = {
 }
 
 class HeaderLayout extends React.Component {
-    aboutAction(){
+    aboutAction() {
         HeaderActions.aboutAction();
     }
 
-    createEventAction(){
+    createEventAction() {
         HeaderActions.createEventAction();
     }
 
-    createInstitutionAction(){
+    createInstitutionAction() {
         HeaderActions.createInstitutionAction();
     }
 
-    eventListAction(){
+    eventListAction() {
         HeaderActions.eventListAction();
     }
 
-    homeAction(){
+    homeAction() {
         HeaderActions.homeAction();
+    }
+
+    responseFacebook(response) {
+        console.log(response);
     }
 
     render() {
@@ -65,8 +70,15 @@ class HeaderLayout extends React.Component {
                         </ul>
                         <form action="/connect/facebook" method="POST">
                             <input type="hidden" name="scope" value="user_posts"/>
-                            <p className="navbar-text navbar-right" style={pStyle}>
-                                <button type="submit" className="btn btn-success">Conectar com Facebook</button>
+                            <p className="navbar-right" style={pStyle}>
+                                <FacebookLogin
+                                    appId="107556419780468"
+                                    autoLoad={true}
+                                    fields="name,email,picture"
+                                    scope="public_profile,user_friends"
+                                    callback={this.responseFacebook.bind(this)}
+                                    cssClass="btn onl_btn-facebook"
+                                />
                             </p>
                         </form>
                     </div>
