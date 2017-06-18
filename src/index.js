@@ -57,6 +57,8 @@ class IndexComponent extends React.Component {
         return (
             <DefaultLayout name={this.props.name}>
                 <HeaderLayout
+                    name={this.state.header.user.name}
+                    auth={this.state.header.auth}
                     active={this.state.header.active}/>
                 {this.state.header.indexBodyVisible ? <IndexBody/> : null}
                 {this.state.header.eventListComponentVisible ?

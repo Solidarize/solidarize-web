@@ -11,7 +11,10 @@ class HeaderStore extends EventEmitter {
             createEventVisible: false,
             institutionComponentVisible: false,
             active: 'home',
-            events: []
+            events: [],
+            auth: false,
+            user: {}
+
         }
     }
 
@@ -53,6 +56,10 @@ class HeaderStore extends EventEmitter {
             }
             case 'EVENT_LIST_DATA' : {
                 this.eventDataVisible(action.events);
+                break;
+            }
+            case 'IS_AUTH' : {
+                this.authenticate(action.facebookData);
                 break;
             }
         }
@@ -98,6 +105,13 @@ class HeaderStore extends EventEmitter {
 
     eventDataVisible(data) {
         this.header.events = data;
+        this.emit('change');
+    }
+
+    authenticate(data) {
+        this.setHeaderToDefault();
+        this.header.auth = true;
+        this.header.user.name = data.name;
         this.emit('change');
     }
 }

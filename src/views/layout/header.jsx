@@ -12,6 +12,11 @@ const navStyle = {
     marginBottom: '5px',
 }
 
+const nameStyle = {
+    padding: '9px',
+    margin: 'auto'
+}
+
 class HeaderLayout extends React.Component {
     aboutAction() {
         HeaderActions.aboutAction();
@@ -33,8 +38,9 @@ class HeaderLayout extends React.Component {
         HeaderActions.homeAction();
     }
 
-    responseFacebook(response) {
+    facebookCallback(response) {
         console.log(response);
+        HeaderActions.authAction(response)
     }
 
     render() {
@@ -68,19 +74,18 @@ class HeaderLayout extends React.Component {
                             <li className={this.props.active == 'sobre' ? "active" : ''}>
                                 <a href="#" onClick={this.aboutAction.bind(this)}>Sobre</a></li>
                         </ul>
-                        <form action="/connect/facebook" method="POST">
-                            <input type="hidden" name="scope" value="user_posts"/>
-                            <p className="navbar-right" style={pStyle}>
-                                <FacebookLogin
-                                    appId="107556419780468"
-                                    autoLoad={true}
-                                    fields="name,email,picture"
-                                    scope="public_profile,user_friends"
-                                    callback={this.responseFacebook.bind(this)}
-                                    cssClass="btn onl_btn-facebook"
-                                />
-                            </p>
-                        </form>
+                        <p className="navbar-right" style={pStyle}>
+                        {!this.props.auth ?
+                            <FacebookLogin
+                                appId="107556419780468"
+                                autoLoad={true}
+                                fields="name,email,picture"
+                                scope="public_profile,user_friends"
+                                callback={this.facebookCallback.bind(this)}
+                                cssClass="btn onl_btn-facebook"
+                            />
+                            : <p style={nameStyle}>Olá, {this.props.name}</p>}
+                        </p>
                     </div>
                 </div>
             </nav>

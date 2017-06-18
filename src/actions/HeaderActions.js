@@ -44,3 +44,11 @@ export function homeAction() {
             })
         });
 }
+
+export function authAction(data) {
+    dispatcher.dispatch({
+        type: 'IS_AUTH',
+        facebookData: data
+    });
+    homeAction();
+}
