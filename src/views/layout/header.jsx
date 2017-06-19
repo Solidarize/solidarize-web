@@ -65,9 +65,10 @@ class HeaderLayout extends React.Component {
                             <li className={this.props.active == 'event' ? "active" : ''}>
                                 <a href="#" onClick={this.eventListAction.bind(this)}>Eventos</a>
                             </li>
-                            <li className={this.props.active == 'createEvent' ? "active" : ''}>
-                                <a href="#" onClick={this.createEventAction.bind(this)}>Criar Evento</a>
-                            </li>
+                            {this.props.auth ?
+                                <li className={this.props.active == 'createEvent' ? "active" : ''}>
+                                    <a href="#" onClick={this.createEventAction.bind(this)}>Criar Evento</a>
+                                </li> : null}
                             <li className={this.props.active == 'createInstitution' ? "active" : ''}>
                                 <a href="#" onClick={this.createInstitutionAction.bind(this)}>Criar Instituição</a>
                             </li>
@@ -75,16 +76,16 @@ class HeaderLayout extends React.Component {
                                 <a href="#" onClick={this.aboutAction.bind(this)}>Sobre</a></li>
                         </ul>
                         <p className="navbar-right" style={pStyle}>
-                        {!this.props.auth ?
-                            <FacebookLogin
-                                appId="107556419780468"
-                                autoLoad={true}
-                                fields="name,email,picture"
-                                scope="public_profile,user_friends"
-                                callback={this.facebookCallback.bind(this)}
-                                cssClass="btn onl_btn-facebook"
-                            />
-                            : <p style={nameStyle}>Olá, {this.props.name}</p>}
+                            {!this.props.auth ?
+                                <FacebookLogin
+                                    appId="107556419780468"
+                                    autoLoad={true}
+                                    fields="name,email,picture"
+                                    scope="public_profile,user_friends"
+                                    callback={this.facebookCallback.bind(this)}
+                                    cssClass="btn onl_btn-facebook"
+                                />
+                                : <p style={nameStyle}>Olá, {this.props.name}</p>}
                         </p>
                     </div>
                 </div>
