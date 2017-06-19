@@ -1,13 +1,17 @@
 var React = require('react');
 
+const containerStyle = {
+    clear: 'both',
+    paddingTop: '60px'
+}
 
 class FooterLayout extends React.Component {
     render() {
         return (
-            <footer className="text-center">
+            <footer className="text-center"style={containerStyle}>
                 <div className="footer-above">
                     <div className="container">
-                        <div className="row">
+                        <div className="col-md-12">
                             <div className="footer-col col-md-4">
                                 <h3></h3>
                                 <p></p>
@@ -43,7 +47,7 @@ class FooterLayout extends React.Component {
                 </div>
                 <div className="footer-below">
                     <div className="container">
-                        <div className="row">
+                        <div className="col-md-12">
                             <div className="col-lg-12">
                                 Copyright &copy; Solidarize 2017
                             </div>
