@@ -17,17 +17,21 @@ const createFormData = (form) => {
     body["timestamp"] = new Date().toISOString();
     body["event_time"] = new Date().toISOString();
     body["address"] = body["address"] + " - " + body["addressNumber"];
+    body["owner"] = {id : 1};
+    
     return JSON.stringify(body);
 }
 
 
 export function createEventAction(event) {
-    var url = "https://solidarize-dev.herokuapp.com/event";
+    var url = "http://localhost:8080/event";
     let data = createFormData(event);
     dispatcher.dispatch({
         type: 'CREATE_EVENT'
     });
     console.log(data);
+    
+    
     axiosConfig().post(url, data)
         .then(res => {
             dispatcher.dispatch({
