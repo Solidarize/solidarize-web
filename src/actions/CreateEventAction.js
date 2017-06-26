@@ -17,7 +17,7 @@ const createFormData = (form) => {
     body["timestamp"] = new Date().toISOString();
     body["event_time"] = new Date().toISOString();
     body["address"] = body["address"] + " - " + body["addressNumber"];
-    body["owner"] = {id : 1};
+    body["owner"] = {id : 24};
     
     return JSON.stringify(body);
 }
