@@ -24,7 +24,7 @@ const createFormData = (form) => {
 
 
 export function createEventAction(event) {
-    var url = "http://localhost:8080/event";
+    var url = "https://solidarize-dev.herokuapp.com/event";
     let data = createFormData(event);
     dispatcher.dispatch({
         type: 'CREATE_EVENT'
