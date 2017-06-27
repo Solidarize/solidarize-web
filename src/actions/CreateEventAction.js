@@ -17,6 +17,8 @@ const createFormData = (form) => {
     body["timestamp"] = new Date().toISOString();
     body["event_time"] = new Date().toISOString();
     body["address"] = body["address"] + " - " + body["addressNumber"];
+    body["owner"] = {id : 24};
+    
     return JSON.stringify(body);
 }
 
@@ -28,6 +30,8 @@ export function createEventAction(event) {
         type: 'CREATE_EVENT'
     });
     console.log(data);
+    
+    
     axiosConfig().post(url, data)
         .then(res => {
             dispatcher.dispatch({

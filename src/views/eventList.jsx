@@ -1,6 +1,7 @@
 import React from 'react';
 import evento  from '../image/evento.jpg'
 import * as EventDetailsAction from '../actions/EventDetailsAction'
+import InstitutionDetail from "./institutionDetail"
 
 const centralize = {
     width: '860px',
@@ -94,7 +95,11 @@ class EventList extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        <div className={this.props.isEventDetail ? "float-right" : 'displayNone'}>
+                            <InstitutionDetail institution={event.owner}/>
+                        </div>
                         <br/><br/><br/><br/>
+
                     </div>
                 )}
             </div>
