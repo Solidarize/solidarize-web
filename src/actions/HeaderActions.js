@@ -45,10 +45,25 @@ export function homeAction() {
         });
 }
 
-export function authAction(data) {
+export function userHomeAction() {
     dispatcher.dispatch({
-        type: 'IS_AUTH',
-        facebookData: data
+        type: 'USER_HOME_COMPONENT_VISIBLE'
     });
-    homeAction();
+    axios.get(`https://solidarize-dev.herokuapp.com/events/rank?offset=3&order=desc`)
+        .then(res => {
+            dispatcher.dispatch({
+                type: 'EVENT_LIST_DATA',
+                events: res.data
+            })
+        });
+}
+
+export function authAction(data) {
+    axios.get(`http://localhost:8080/user/1`).then(res => {
+        res.data.name = "Jéferson"; //res.date        
+        dispatcher.dispatch({
+            type: 'IS_AUTH',
+            userData: res.data
+        })
+    });    
 }
