@@ -10,8 +10,11 @@ import EventList from './views/eventList'
 import IndexBody from './views/indexBody'
 import EventDetailComponent from './views/eventDetail'
 import CreateInstitutionComponent from './views/createInstituction'
+import UserControlPanel from './views/userControlPanel'
+
 import './views/layout/solidarize.css'
 import './style/background.png'
+
 
 import HeaderStore from './stores/HeaderStore'
 import EventDetailsStore   from './stores/EventDetailsStore'
@@ -68,6 +71,7 @@ class IndexComponent extends React.Component {
                 {this.state.eventDetails.eventDetailVisible ?
                     <EventDetailComponent events={this.state.eventDetails.events}/> : null}
                 {this.state.header.institutionComponentVisible ? <CreateInstitutionComponent/> : null}
+                {this.state.header.userControlPanelComponentVisible ? <UserControlPanel user={this.state.header.user}/> : null}
                 <FooterLayout/>
             </DefaultLayout>
         )

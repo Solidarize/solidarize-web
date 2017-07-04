@@ -10,6 +10,7 @@ class HeaderStore extends EventEmitter {
             eventListComponentVisible: true,
             createEventVisible: false,
             institutionComponentVisible: false,
+            userControlPanelComponentVisible: false,
             active: 'home',
             events: [],
             auth: false,
@@ -24,6 +25,7 @@ class HeaderStore extends EventEmitter {
         this.header.eventListComponentVisible = false;
         this.header.createEventVisible = false;
         this.header.institutionComponentVisible = false;
+        this.header.userControlPanelComponentVisible = false;
         this.header.active = 'none';
         return this.header;
     }
@@ -51,7 +53,12 @@ class HeaderStore extends EventEmitter {
                 break;
             }
             case 'HOME_COMPONENT_VISIBLE' : {
-                this.homeComponentVisible();
+                if(this.auth){
+                    this.userHomeComponentVisible();
+                } else {
+                    this.homeComponentVisible();
+                }
+                
                 break;
             }
             case 'EVENT_LIST_DATA' : {
@@ -59,7 +66,11 @@ class HeaderStore extends EventEmitter {
                 break;
             }
             case 'IS_AUTH' : {
-                this.authenticate(action.facebookData);
+                this.authenticate(action.userData);
+                break;
+            }
+            case 'USER_HOME_COMPONENT_VISIBLE':{
+                this.userHomeComponentVisible();
                 break;
             }
         }
@@ -103,16 +114,25 @@ class HeaderStore extends EventEmitter {
         this.emit('change');
     }
 
+    userHomeComponentVisible() {
+        this.setHeaderToDefault();
+        this.header.userControlPanelComponentVisible = true;
+        this.header.active = 'userHome';
+        this.header.events = [];
+        this.emit('change');
+    }
+
     eventDataVisible(data) {
         this.header.events = data;
         this.emit('change');
     }
 
     authenticate(data) {
-        this.setHeaderToDefault();
+        //this.setHeaderToDefault();
         this.header.auth = true;
-        this.header.user.name = data.name;
-        this.emit('change');
+        this.header.user = data;        
+        //this.emit('change');
+        this.userHomeComponentVisible();
     }
 }
 
