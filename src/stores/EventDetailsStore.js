@@ -7,8 +7,10 @@ class EventDetailsStore extends EventEmitter {
         super()
         this.eventDetail = {
             eventDetailVisible: false,
-            events: []
+            events: [],
+            subscribed: true
         };
+        
     }
 
     handleAction(action) {
@@ -21,6 +23,9 @@ class EventDetailsStore extends EventEmitter {
                 this.updateEvents(action.events);
                 break;
             }
+            case 'IS_USER_SUBSCRIBED':{
+                this.isUserSubscribed(action.subscribed);                    
+            }
         }
     }
 
@@ -31,6 +36,7 @@ class EventDetailsStore extends EventEmitter {
     }
 
     updateEvents(data) {
+        this.subscribed = false;
         this.eventDetail.events = data;
         this.emit('change');
     }
@@ -42,7 +48,17 @@ class EventDetailsStore extends EventEmitter {
     setDefaultEventDetails() {
         this.eventDetail.eventDetailVisible = false;
         this.eventDetail.events = [];
+        this.subscribed = false;
         return this.eventDetail;
+    }
+
+    isUserSubscribed(isSubscribed){
+        this.eventDetail.subscribed = isSubscribed;
+        this.emit('change');
+    }
+
+    isSubscribed(){
+        return this.eventDetail.subscribed;
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import avatar from '../image/avatar.jpg';
 import EventList from "./eventList";
+import UserStore from "../stores/UserStore"
 
 const getMonth = (event_time) => {
     var eventDate = new Date(event_time);
@@ -26,10 +27,23 @@ const getDay = (event_time) => {
     return eventDate.getUTCDate();
 }
 
+
+
 class UserControlPanel extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            user: UserStore.getLoggedUser()            
+        }
     }
+
+    componentWillMount(){
+        UserStore.on("change", () => {
+            this.setState({
+                user: UserStore.getLoggedUser()
+            });
+        });
+    }   
 
     render() {
         return (
@@ -39,10 +53,10 @@ class UserControlPanel extends React.Component {
                         <div className="col-md-3">
                             <div className="text-center">
                                 <br /><img src={avatar} className="img img-circle" />
-                                <h4>{this.props.user.name}</h4><hr />
+                                <h4>{this.state.user.name}</h4><hr />
                                 <h4>Meus dados:</h4>
-                                <p><b>Nome:</b> {this.props.user.name}</p>
-                                <p><b>Email:</b> {this.props.user.email == null ? "Email não informado" : this.props.user.email}</p>
+                                <p><b>Nome:</b> {this.state.user.name}</p>
+                                <p><b>Email:</b> {this.state.user.email == null ? "Email não informado" : this.state.user.email}</p>
                                 <a href="#" className="btn btn-warning"><i className="fa fa-pencil"> Editar Informações</i></a>
                             </div>
                         </div>
@@ -56,9 +70,9 @@ class UserControlPanel extends React.Component {
                                 <th>Endereço</th>
                                 <th>Data</th>
                                 {/*<th>Ações</th>*/}
-                                {this.props.user.events == null ? <tr><td colSpan='3'>Sem Dados</td></tr> : this.props.user.events.map(event =>
+                                {this.state.user.events == null || this.state.user.events.length == 0 ? <tr><td style={{columnSpan: '3', textAlign: 'center'}}>Sem Dados</td></tr> : this.props.user.events.map(event =>
                                     <tr>
-                                        <td>{event.name}</td>
+                                        <td>{event.title}</td>
                                         <td>{event.address}</td>
                                         <td>{event.event_time}</td>
                                         {/*<td>

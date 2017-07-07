@@ -53,7 +53,7 @@ class HeaderStore extends EventEmitter {
                 break;
             }
             case 'HOME_COMPONENT_VISIBLE' : {
-                if(this.auth){
+                if(this.header.auth){
                     this.userHomeComponentVisible();
                 } else {
                     this.homeComponentVisible();
@@ -128,10 +128,9 @@ class HeaderStore extends EventEmitter {
     }
 
     authenticate(data) {
-        //this.setHeaderToDefault();
         this.header.auth = true;
         this.header.user = data;        
-        //this.emit('change');
+        
         this.userHomeComponentVisible();
     }
 }
