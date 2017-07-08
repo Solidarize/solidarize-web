@@ -16,12 +16,10 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <div style={containerStyle}>
-                <div className="row destaques">
-                    <div className="col-md-12">
-                        <h3 className="h3-destaques pull-left">Login:</h3><br/><br/>
-                    </div>
+                <div className="destaques">                   
+                    <h3 className="h3-destaques pull-left">Login:</h3><br/><br/>               
                 </div>
-                <div className="row">
+                <div className="row-no-padding">
                     <div className="container-fluid">
                         <br/>
                       	<div className="container">
