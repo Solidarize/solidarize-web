@@ -55,28 +55,27 @@ class EventList extends React.Component {
             )
         }
         return (
-            <div className="row" style={containerStyle}>
+            <div className="col-md-offset-2">
                 {this.props.events.map(event =>
                     <div>
-                        <div className="row" style={centralize}>
-                            <p><img alt="" src={evento} className="img-responsive img-thumbnail"
-                                    width="100%"/>
-                            </p>
+                        <div className="col-md-8" style={containerStyle}>
+                            <p><img alt="" src={evento} className="img-responsive img-thumbnail" width="100%"/></p>
                         </div>
-                        <div className="row" style={centralize}>
+                        <div className="col-md-8">
                             <div className="post-date">
                                 <i className="fa fa-calendar fa-2x"></i><br/>
                                 <span className="month">{getMonth(event.event_time)}</span><br/>
                                 <span className="day">{getDay(event.event_time)}</span><br/>
                                 <hr className="hr-date"/>
                                 <div>
+                                
+                                    <span className="like-box-heart">
+                                        <i className="fa fa-heart"/>
+                                    </span>
+                                    <span className="like-box-score">
+                                        <b>{event.rank}</b>
+                                    </span>
                                 </div>
-                                <span className="like-box-heart">
-                            <i className="fa fa-heart"/>
-                        </span>
-                                <span className="like-box-score">
-                        <b>{event.rank}</b>
-                        </span>
                             </div>
                             <div className="float-right">
                                 <h2 className="post-Title">{event.title}</h2>
@@ -95,11 +94,7 @@ class EventList extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className={this.props.isEventDetail ? "float-right" : 'displayNone'}>
-                            <InstitutionDetail institution={event.owner}/>
-                        </div>
                         <br/><br/><br/><br/>
-
                     </div>
                 )}
             </div>
