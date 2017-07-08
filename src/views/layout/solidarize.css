@@ -1,11 +1,19 @@
+.row-no-padding {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 body{
     margin: 50px 0px 5px 0px;
     background-color: #f5f5f5;
 }
 
 .destaques{
-    margin: 0px;
-    padding: 20px 20px 0px 20px;
+    position: relative;
+    min-height: 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 40px 20px 0px 20px;
     color: #FFF;
     background: #4FAFC2;
     text-align: center;
@@ -33,6 +41,24 @@ body{
 }
 
 .btn-destaque{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
     background: #3E6D92;
     color: #fff;
     border: 2px solid #fff;
@@ -170,15 +196,15 @@ body{
 }
 
 .user-info-box{
-    margin-top: 30px;
     background-color: #fff;
-    border-top: 1px solid #f0f0f0;
-    -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+    border-top: 2px solid #f0f0f0;
+    -webkit-box-shadow: 1px 2px 3px 1px rgba(0,0,0,0.8);
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
     padding: 10px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    overflow: auto;
 }
 
 /* layout.css Style */
@@ -200,8 +226,6 @@ body{
   color: #222;
   border-color: #222;
 }
-
-
 
 .file-preview-input {
     position: relative;
@@ -244,7 +268,89 @@ body{
     display: none
 }
 
-.row {
-    margin-right: 0px;
-    margin-left: 0px;
+.card-container.card {
+    width: 350px;
+    padding: 40px 40px;
+}
+
+/*
+ * Card component
+ */
+.card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+/*
+ * Form styles
+ */
+.profile-name-card {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0 0;
+    min-height: 1em;
+}
+
+.reauth-email {
+    display: block;
+    color: #404040;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin #inputEmail,
+.form-signin #inputPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px;
+}
+
+.form-signin input[type=email],
+.form-signin input[type=password],
+.form-signin input[type=text],
+.form-signin button {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    border-color: rgb(104, 145, 162);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
 }
