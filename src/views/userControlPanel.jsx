@@ -70,7 +70,7 @@ class UserControlPanel extends React.Component {
                                 <th>Endereço</th>
                                 <th>Data</th>
                                 {/*<th>Ações</th>*/}
-                                {this.state.user.events == null || this.state.user.events.length == 0 ? <tr><td style={{columnSpan: '3', textAlign: 'center'}}>Sem Dados</td></tr> : this.props.user.events.map(event =>
+                                {this.state.user.events == null || this.state.user.events.length == 0 ? <tr><td style={{columnSpan: '3', textAlign: 'center'}}>Sem Dados</td></tr> : this.state.user.events.map(event =>
                                     <tr>
                                         <td>{event.title}</td>
                                         <td>{event.address}</td>

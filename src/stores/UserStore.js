@@ -1,11 +1,13 @@
-import EventEmitter from "events";
+import {EventEmitter} from "events";
 import dispatcher from "../Dispatcher"
 
 class UserStore extends EventEmitter {
     constructor() {
         super();
         this.isAuth = false;
-        this.loggedUser = {};
+        this.loggedUser = {
+            events: []
+        };
         this.name = "";
     }
 
@@ -20,17 +22,26 @@ class UserStore extends EventEmitter {
     login(user) {
         if (user != null) {
             this.isAuth = true;
-            this.loggedUser = user;
             this.name = user.name;
+            this.setLoggedUser(user);
         }
 
-        this.emit("change");
+        this.emit('change');
     }
 
     updateLoggedUser(user) {
+        this.setLoggedUser(user);
+
+        this.emit('change');
+    }
+
+    setLoggedUser(user) {
         this.loggedUser = user;
         this.loggedUser.name = this.name;
-        this.emit("change");
+
+        if (this.loggedUser.events == null) {
+            this.loggedUser.events = [];
+        }
     }
 
     handleActions(action) {
@@ -47,4 +58,5 @@ class UserStore extends EventEmitter {
 
 const userStore = new UserStore;
 dispatcher.register(userStore.handleActions.bind(userStore));
+
 export default userStore;

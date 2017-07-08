@@ -71,7 +71,7 @@ class IndexComponent extends React.Component {
                 {this.state.eventDetails.eventDetailVisible ?
                     <EventDetailComponent events={this.state.eventDetails.events}/> : null}
                 {this.state.header.institutionComponentVisible ? <CreateInstitutionComponent/> : null}
-                {this.state.header.userControlPanelComponentVisible ? <UserControlPanel user={this.state.header.user}/> : null}
+                {this.state.header.userControlPanelComponentVisible ? <UserControlPanel /> : null}
                 <FooterLayout/>
             </DefaultLayout>
         )
