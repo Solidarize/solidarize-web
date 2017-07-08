@@ -11,6 +11,7 @@ class HeaderStore extends EventEmitter {
             createEventVisible: false,
             institutionComponentVisible: false,
             userControlPanelComponentVisible: false,
+            loginComponentVisible: false,
             active: 'home',
             events: [],
             auth: false,
@@ -26,6 +27,7 @@ class HeaderStore extends EventEmitter {
         this.header.createEventVisible = false;
         this.header.institutionComponentVisible = false;
         this.header.userControlPanelComponentVisible = false;
+        this.header.loginComponentVisible = false;
         this.header.active = 'none';
         return this.header;
     }
@@ -71,6 +73,10 @@ class HeaderStore extends EventEmitter {
             }
             case 'USER_HOME_COMPONENT_VISIBLE':{
                 this.userHomeComponentVisible();
+                break;
+            }
+            case 'LOGIN_COMPONENT_VISIBLE' : {
+                this.loginComponentVisible();
                 break;
             }
         }
@@ -133,6 +139,13 @@ class HeaderStore extends EventEmitter {
         this.header.user = data;        
         //this.emit('change');
         this.userHomeComponentVisible();
+    }
+
+    loginComponentVisible() {
+        this.setHeaderToDefault();
+        this.header.loginComponentVisible = true;
+        this.header.active = 'login';
+        this.emit('change');
     }
 }
 

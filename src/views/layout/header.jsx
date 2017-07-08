@@ -43,6 +43,9 @@ class HeaderLayout extends React.Component {
         HeaderActions.authAction(response)
     }
 
+    loginAction() {
+        HeaderActions.loginAction();
+    }
     render() {
         return (
             <nav className="navbar navbar-default navbar-fixed-top" style={navStyle}>
@@ -74,6 +77,8 @@ class HeaderLayout extends React.Component {
                             </li>
                             <li className={this.props.active == 'sobre' ? "active" : ''}>
                                 <a href="#" onClick={this.aboutAction.bind(this)}>Sobre</a></li>
+                            <li className={this.props.active == 'login' ? "active" : ''}>
+                                <a href="#" onClick={this.loginAction.bind(this)}>Login</a></li>
                         </ul>
                         <p className="navbar-right" style={pStyle}>
                             {!this.props.auth ?

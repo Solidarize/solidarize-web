@@ -14,6 +14,12 @@ export function aboutAction() {
     })
 }
 
+export function loginAction() {
+    dispatcher.dispatch({
+        type: 'LOGIN_COMPONENT_VISIBLE'
+    })
+}
+
 export function createEventAction() {
     dispatcher.dispatch({
         type: 'CREATE_EVENT_COMPONENT_VISIBLE'
