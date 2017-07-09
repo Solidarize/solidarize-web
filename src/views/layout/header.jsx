@@ -1,6 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import * as HeaderActions from '../../actions/HeaderActions'
+import * as UserActions from '../../actions/UserActions'
 
 const pStyle = {
     marginTop: '7px',
@@ -40,7 +41,7 @@ class HeaderLayout extends React.Component {
 
     facebookCallback(response) {
         console.log(response);
-        HeaderActions.authAction(response)
+        UserActions.login(response)
     }
 
     render() {

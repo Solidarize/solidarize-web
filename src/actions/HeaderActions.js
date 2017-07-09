@@ -64,26 +64,3 @@ export function userHomeAction() {
             })
         });
 }
-
-export function authAction(data) {
-    axios.get(`https://solidarize-dev.herokuapp.com/user/` + data.id).then(res => {
-        console.log(res);
-        if (res.data == "") {
-            let user = {id : data.id, type : 2};
-            axiosConfig().post('https://solidarize-dev.herokuapp.com/user/', JSON.stringify(user))
-                .then(res2 => {
-                    res2.data.name = data.name;                    
-                    dispatcher.dispatch({
-                        type: 'IS_AUTH',
-                        userData: res2.data
-                    })
-                });
-        } else {
-            res.data.name = data.name;
-            dispatcher.dispatch({
-                type: 'IS_AUTH',
-                userData: res.data
-            })
-        }
-    });
-}
